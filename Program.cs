@@ -196,6 +196,7 @@ namespace Castle_project
             }
 
             AddRoomsToSpaceArray();
+            int whilecounter = 0;
 
             while (RoomsHasSpaceToGrow())
             {
@@ -282,6 +283,11 @@ namespace Castle_project
                         GrowBot(room);
                     }
                 }
+                whilecounter++;
+                if(whilecounter > 100)
+                {
+                    break;
+                }
             }
         }
 
@@ -292,7 +298,7 @@ namespace Castle_project
 
         private int GetRandomCoord()
         {
-            return rand.Next(3, 29);
+            return rand.Next(3, 28);
         }
 
         private void GetRandomRoomsList(int numberOfRooms)
@@ -356,27 +362,31 @@ namespace Castle_project
 
         private Boolean CheckForCoord(int i)
         {
-            for (int j = i - 1; j >= 0; j--)
+            if(spaceArray[roomList.ElementAt(i).coord[0], roomList.ElementAt(i).coord[1]] != 1)
             {
-                if (roomList.ElementAt(i).coord[0].Equals(roomList.ElementAt(j).coord[0]))
+                for (int j = i - 1; j >= 0; j--)
                 {
-                    if (roomList.ElementAt(i).coord[1].Equals(roomList.ElementAt(j).coord[1]))
+                    if (roomList.ElementAt(i).coord[0].Equals(roomList.ElementAt(j).coord[0]))
                     {
-                        return true;
+                        if (roomList.ElementAt(i).coord[1].Equals(roomList.ElementAt(j).coord[1]))
+                        {
+                            return true;
+                        }
                     }
                 }
-            }
 
-            for (int j = i + 1; j < roomList.Count; j++)
-            {
-                if (roomList.ElementAt(i).coord[0].Equals(roomList.ElementAt(j).coord[0]))
+                for (int j = i + 1; j < roomList.Count; j++)
                 {
-                    if (roomList.ElementAt(i).coord[1].Equals(roomList.ElementAt(j).coord[1]))
+                    if (roomList.ElementAt(i).coord[0].Equals(roomList.ElementAt(j).coord[0]))
                     {
-                        return true;
+                        if (roomList.ElementAt(i).coord[1].Equals(roomList.ElementAt(j).coord[1]))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
+            
 
             return false;
         }
