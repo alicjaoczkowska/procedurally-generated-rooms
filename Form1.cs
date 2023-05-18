@@ -28,7 +28,7 @@ namespace Castle_project
             Graphics g = e.Graphics;
 
             RoomGenerator gen = new RoomGenerator();
-            gen.GenerateRooms(10);
+            gen.GenerateRooms(7);
             gen.PrintSpaceArray();
             List<Room> roomList = gen.roomList;
 
@@ -53,6 +53,6 @@ namespace Castle_project
                 g.DrawRectangle(mainPen, xOffset + (room.coord[1] * tileSize), yOffset + (room.coord[0] * tileSize), (room.size[0]) * tileSize, (room.size[1]) * tileSize);
                 g.DrawString(room.GetRoomType(room.type), mainFont, towerBrush, xOffset + (room.coord[1] * tileSize) + ((room.size[0]) * tileSize / 5), yOffset + (room.coord[0] * tileSize) + ((room.size[1]) * tileSize / 2));
             }
-        }
+        }        
     }
 }
